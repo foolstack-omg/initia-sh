@@ -68,7 +68,7 @@ function install_node() {
     git clone https://github.com/initia-labs/initia
     cd initia
     git pull
-    git checkout v0.2.15
+    git checkout v0.2.14
     make install
     initiad version
 
