@@ -51,6 +51,8 @@ function install_node() {
     install_nodejs_and_npm
     install_pm2
     pm2 del all
+    # Back up priv_validator_state.json if needed
+    cp ~/.initia/data/priv_validator_state.json  ~/.initia/priv_validator_state.json
     rm -rf ~/initia
     # 更新和安装必要的软件
     apt update && apt upgrade -y
@@ -115,8 +117,9 @@ function install_node() {
     
     # 配置快照
     sudo apt install lz4 -y
+    initiad tendermint unsafe-reset-all --home $HOME/.initia --keep-addr-book
     curl -L https://snapshots.polkachu.com/testnet-snapshots/initia/initia_218063.tar.lz4 | tar -Ilz4 -xf - -C $HOME/.initia
-    mv $HOME/.initia/priv_validator_state.json.backup $HOME/.initia/data/priv_validator_state.json
+    cp ~/.initia/priv_validator_state.json  ~/.initia/data/priv_validator_state.json
     
     pm2 start ./build/slinky -- --oracle-config-path ./config/core/oracle.json --market-map-endpoint 0.0.0.0:53490
     sed -i "s/^indexer *=.*/indexer = \"null\"/" $HOME/.initia/config/config.toml 
