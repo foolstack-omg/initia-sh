@@ -67,7 +67,7 @@ function install_node() {
     # 安装所有二进制文件
     git clone https://github.com/initia-labs/initia
     cd initia
-    git checkout v0.2.15
+    git checkout v0.2.14
     make install
     initiad version
 
@@ -116,7 +116,7 @@ function install_node() {
     mv $HOME/.initia/priv_validator_state.json.backup $HOME/.initia/data/priv_validator_state.json
     
     pm2 start ./build/slinky -- --oracle-config-path ./config/core/oracle.json --market-map-endpoint 0.0.0.0:53490
-    wget http://95.216.228.91/initia-addrbook.json -O $HOME/.initia/config/addrbook.json
+    PEERS=$(curl -s --max-time 3 --retry 2 --retry-connrefused "https://rpc-initia-testnet.trusted-point.com/peers.txt") if [ -z "$PEERS" ]; then echo "No peers were retrieved from the URL." else echo -e "\nPEERS: "$PEERS"" sed -i "s/^persistent_peers =./persistent_peers = "$PEERS"/" "$HOME/.initia/config/config.toml" echo -e "\nConfiguration file updated successfully.\n" fi
     pm2 restart initiad
 
     echo '====================== 安装完成,请退出脚本后执行 source $HOME/.bash_profile 以加载环境变量==========================='
