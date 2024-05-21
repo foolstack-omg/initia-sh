@@ -121,6 +121,7 @@ if [ -z "$PEERS" ]; then
     echo "No peers were retrieved from the URL."
 else
     echo -e "\nPEERS: "$PEERS""
+    sed -i "s/^indexer *=.*/indexer = \"null\"/" $HOME/.initia/config/config.toml
     sed -i "s/^persistent_peers =./persistent_peers = "$PEERS"/" "$HOME/.initia/config/config.toml"
     echo -e "\nConfiguration file updated successfully.\n"
 fi
