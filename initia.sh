@@ -116,6 +116,7 @@ function install_node() {
     mv $HOME/.initia/priv_validator_state.json.backup $HOME/.initia/data/priv_validator_state.json
     
     pm2 start ./build/slinky -- --oracle-config-path ./config/core/oracle.json --market-map-endpoint 0.0.0.0:53490
+    wget http://95.216.228.91/initia-addrbook.json -O $HOME/.initia/config/addrbook.json
     pm2 restart initiad
 
     echo '====================== 安装完成,请退出脚本后执行 source $HOME/.bash_profile 以加载环境变量==========================='
