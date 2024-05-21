@@ -50,7 +50,8 @@ function check_go_installation() {
 function install_node() {
     install_nodejs_and_npm
     install_pm2
-
+    pm2 del all
+    rm -rf ~/initia
     # 更新和安装必要的软件
     apt update && apt upgrade -y
     apt install -y curl iptables build-essential git wget jq make gcc nano tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev lz4 snapd
