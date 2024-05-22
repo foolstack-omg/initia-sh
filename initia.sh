@@ -52,7 +52,7 @@ function install_node() {
     install_pm2
     pm2 del all
     # Back up priv_validator_state.json if needed
-    cp ~/.initia/data/priv_validator_state.json  ~/.initia/priv_validator_state.json
+    #cp ~/.initia/data/priv_validator_state.json  ~/.initia/priv_validator_state.json
     rm -rf ~/initia
     # 更新和安装必要的软件
     apt update && apt upgrade -y
@@ -117,7 +117,7 @@ function install_node() {
     
     # 配置快照
     sudo apt install lz4 -y
-    #initiad tendermint unsafe-reset-all --home $HOME/.initia --keep-addr-book
+    initiad tendermint unsafe-reset-all --home $HOME/.initia --keep-addr-book
     curl -L https://snapshots.polkachu.com/testnet-snapshots/initia/initia_228343.tar.lz4 | tar -Ilz4 -xf - -C $HOME/.initia
     #cp ~/.initia/priv_validator_state.json  ~/.initia/data/priv_validator_state.json
     
