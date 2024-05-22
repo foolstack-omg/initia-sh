@@ -118,7 +118,7 @@ function install_node() {
     # 配置快照
     sudo apt install lz4 -y
     initiad tendermint unsafe-reset-all --home $HOME/.initia --keep-addr-book
-    curl -L https://snapshots.polkachu.com/testnet-snapshots/initia/initia_218063.tar.lz4 | tar -Ilz4 -xf - -C $HOME/.initia
+    curl -L https://snapshots.polkachu.com/testnet-snapshots/initia/initia_228343.tar.lz4 | tar -Ilz4 -xf - -C $HOME/.initia
     cp ~/.initia/priv_validator_state.json  ~/.initia/data/priv_validator_state.json
     
     pm2 start ./build/slinky -- --oracle-config-path ./config/core/oracle.json --market-map-endpoint 0.0.0.0:53490
